@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101010">
+  <title>GBR Store | Moda e Estilo</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #101010;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    header {
+      background: #080808;
+      padding: 22px 15px;
+      text-align: center;
+      border-bottom: 2px solid #20d64b;
+    }
+    header h1 { color: #20d64b; margin: 0; font-size: 32px; }
+    header p { margin-bottom: 0; }
+    .hero {
+      text-align: center;
+      padding: 45px 18px;
+      background: linear-gradient(135deg, #111, #173d20);
+    }
+    .hero h2 { font-size: 30px; margin: 0 0 12px; }
+    .hero p { color: #ddd; }
+    .titulo { text-align: center; color: #20d64b; margin-top: 30px; }
+    .produtos {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 15px;
+    }
+    .produto {
+      background: #1c1c1c;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 15px 10px;
+      text-align: center;
+    }
+    .produto .emoji { font-size: 42px; }
+    .produto h3 { margin: 10px 0; }
+    .preco { color: #20d64b; font-size: 20px; font-weight: bold; }
+    .botao {
+      display: inline-block;
+      background: #20d64b;
+      color: #071108;
+      padding: 11px 15px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+    .aviso { text-align: center; padding: 20px; color: #ccc; }
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      background: #080808;
+      border-top: 1px solid #20d64b;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GBR STORE</h1>
+    <p>Seu estilo, sua atitude!</p>
+  </header>
+
+  <section class="hero">
+    <h2>Bem-vindo à GBR Store</h2>
+    <p>Bonés, tênis, camisas, bermudas e muito mais.</p>
+    <a class="botao" href="#produtos">VER PRODUTOS</a>
+  </section>
+
+  <h2 class="titulo" id="produtos">NOSSOS PRODUTOS</h2>
+
+  <section class="produtos">
+    <article class="produto">
+      <div class="emoji">👕</div>
+      <h3>Camisa malha 30.1</h3>
+      <p class="preco">R$ 50,00</p>
+      <p>3 por R$ 120,00</p>
+      <a class="botao" href="#contato">Tenho interesse</a>
+    </article>
+    <article class="produto">
+      <div class="emoji">🩳</div>
+      <h3>Bermuda tectel</h3>
+      <p class="preco">R$ 70,00</p>
+      <a class="botao" href="#contato">Tenho interesse</a>
+    </article>
+    <article class="produto">
+      <div class="emoji">👟</div>
+      <h3>Tênis</h3>
+      <p class="preco">A partir de R$ 200,00</p>
+      <a class="botao" href="#contato">Tenho interesse</a>
+    </article>
+    <article class="produto">
+      <div class="emoji">🧢</div>
+      <h3>Bonés</h3>
+      <p class="preco">Consulte modelos</p>
+      <a class="botao" href="#contato">Tenho interesse</a>
+    </article>
+    <article class="produto">
+      <div class="emoji">🩳</div>
+      <h3>Bermuda de sarja</h3>
+      <p class="preco">R$ 100,00</p>
+      <a class="botao" href="#contato">Tenho interesse</a>
+    </article>
+    <article class="produto">
+      <div class="emoji">🧥</div>
+      <h3>Conjunto de moletom</h3>
+      <p class="preco">R$ 270,00</p>
+      <a class="botao" href="#contato">Tenho interesse</a>
+    </article>
+  </section>
+
+  <div class="aviso">
+    Consulte disponibilidade de tamanhos, modelos e frete.
+    <p>Pagamento e entrega serão combinados com a loja.</p>
+  </div>
+
+  <footer id="contato">
+    <h3>GBR STORE</h3>
+    <p>Moda e estilo para você.</p>
+    <p>WhatsApp: (11) 95288-4586</p>
+    <a class="botao"
+       href="https://wa.me/5511952884586?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20GBR%20Store">
+       FALAR NO WHATSAPP
+    </a>
+    <p>Instagram: @Gbr_store011</p>
+  </footer>
+</body>
+</html>
