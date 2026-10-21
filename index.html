@@ -1,139 +1,311 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#101010">
-  <title>GBR Store | Moda e Estilo</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #101010;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
-    header {
-      background: #080808;
-      padding: 22px 15px;
-      text-align: center;
-      border-bottom: 2px solid #20d64b;
-    }
-    header h1 { color: #20d64b; margin: 0; font-size: 32px; }
-    header p { margin-bottom: 0; }
-    .hero {
-      text-align: center;
-      padding: 45px 18px;
-      background: linear-gradient(135deg, #111, #173d20);
-    }
-    .hero h2 { font-size: 30px; margin: 0 0 12px; }
-    .hero p { color: #ddd; }
-    .titulo { text-align: center; color: #20d64b; margin-top: 30px; }
-    .produtos {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      padding: 15px;
-    }
-    .produto {
-      background: #1c1c1c;
-      border: 1px solid #333;
-      border-radius: 10px;
-      padding: 15px 10px;
-      text-align: center;
-    }
-    .produto .emoji { font-size: 42px; }
-    .produto h3 { margin: 10px 0; }
-    .preco { color: #20d64b; font-size: 20px; font-weight: bold; }
-    .botao {
-      display: inline-block;
-      background: #20d64b;
-      color: #071108;
-      padding: 11px 15px;
-      border-radius: 7px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 8px;
-    }
-    .aviso { text-align: center; padding: 20px; color: #ccc; }
-    footer {
-      text-align: center;
-      padding: 25px 15px;
-      background: #080808;
-      border-top: 1px solid #20d64b;
-      color: #ccc;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GBR Store - Loja Virtual</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fontes Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>GBR STORE</h1>
-    <p>Seu estilo, sua atitude!</p>
-  </header>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col">
 
-  <section class="hero">
-    <h2>Bem-vindo à GBR Store</h2>
-    <p>Bonés, tênis, camisas, bermudas e muito mais.</p>
-    <a class="botao" href="#produtos">VER PRODUTOS</a>
-  </section>
+    <!-- BARRA DE AVISO SUPERIOR -->
+    <div class="bg-emerald-600 text-white text-xs sm:text-sm py-2 px-4 text-center font-medium">
+        ⚡ Frete Grátis para todo o Brasil em compras acima de R$ 199! Use o cupom <span class="underline font-bold">GBR10</span> para 10% OFF.
+    </div>
 
-  <h2 class="titulo" id="produtos">NOSSOS PRODUTOS</h2>
+    <!-- CABEÇALHO / NAVBAR -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+            
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-black tracking-tight text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                <span>GBR<span class="text-slate-900 dark:text-white">STORE</span></span>
+            </a>
 
-  <section class="produtos">
-    <article class="produto">
-      <div class="emoji">👕</div>
-      <h3>Camisa malha 30.1</h3>
-      <p class="preco">R$ 50,00</p>
-      <p>3 por R$ 120,00</p>
-      <a class="botao" href="#contato">Tenho interesse</a>
-    </article>
-    <article class="produto">
-      <div class="emoji">🩳</div>
-      <h3>Bermuda tectel</h3>
-      <p class="preco">R$ 70,00</p>
-      <a class="botao" href="#contato">Tenho interesse</a>
-    </article>
-    <article class="produto">
-      <div class="emoji">👟</div>
-      <h3>Tênis</h3>
-      <p class="preco">A partir de R$ 200,00</p>
-      <a class="botao" href="#contato">Tenho interesse</a>
-    </article>
-    <article class="produto">
-      <div class="emoji">🧢</div>
-      <h3>Bonés</h3>
-      <p class="preco">Consulte modelos</p>
-      <a class="botao" href="#contato">Tenho interesse</a>
-    </article>
-    <article class="produto">
-      <div class="emoji">🩳</div>
-      <h3>Bermuda de sarja</h3>
-      <p class="preco">R$ 100,00</p>
-      <a class="botao" href="#contato">Tenho interesse</a>
-    </article>
-    <article class="produto">
-      <div class="emoji">🧥</div>
-      <h3>Conjunto de moletom</h3>
-      <p class="preco">R$ 270,00</p>
-      <a class="botao" href="#contato">Tenho interesse</a>
-    </article>
-  </section>
+            <!-- Barra de Pesquisa (Desktop) -->
+            <div class="hidden md:flex flex-1 max-w-md mx-4 relative">
+                <input type="text" id="searchInput" placeholder="Buscar produtos na loja..." class="w-full bg-slate-100 dark:bg-slate-800 text-sm rounded-full py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">
+                <svg class="w-4 h-4 absolute left-3.5 top-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
 
-  <div class="aviso">
-    Consulte disponibilidade de tamanhos, modelos e frete.
-    <p>Pagamento e entrega serão combinados com a loja.</p>
-  </div>
+            <!-- Botões de Ação -->
+            <div class="flex items-center gap-3">
+                <!-- Toggle Dark Mode -->
+                <button id="themeToggle" class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition" title="Alternar Tema">
+                    <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                </button>
 
-  <footer id="contato">
-    <h3>GBR STORE</h3>
-    <p>Moda e estilo para você.</p>
-    <p>WhatsApp: (11) 95288-4586</p>
-    <a class="botao"
-       href="https://wa.me/5511952884586?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20GBR%20Store">
-       FALAR NO WHATSAPP
-    </a>
-    <p>Instagram: @Gbr_store011</p>
-  </footer>
-</body>
-</html>
+                <!-- Botão Carrinho -->
+                <button id="cartBtn" class="relative p-2.5 bg-emerald-500 text-white rounded-full hover:bg-emerald-600 transition shadow-md flex items-center justify-center">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                    <span id="cartCount" class="absolute -top-1 -right-1 bg-rose-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-900">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- BANNER PRINCIPAL (HERO BANNER) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-600 via-teal-700 to-slate-900 text-white shadow-xl">
+            <!-- Imagem de fundo com transparência -->
+            <div class="absolute inset-0 opacity-20">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80" alt="Fundo Loja" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Conteúdo do Banner -->
+            <div class="relative z-10 px-6 py-10 sm:px-12 sm:py-16 lg:w-2/3">
+                <span class="inline-block bg-emerald-500/30 text-emerald-200 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 backdrop-blur-sm border border-emerald-400/30">
+                    Nova Coleção 2026
+                </span>
+                
+                <h1 class="text-3xl sm:text-5xl font-black tracking-tight mb-4 leading-tight">
+                    O melhor do estilo e tecnologia ao seu alcance.
+                </h1>
+                
+                <p class="text-sm sm:text-base text-emerald-100 mb-6 max-w-xl">
+                    Descubra ofertas imperdíveis com entrega rápida e garantia total de satisfação. Até <strong class="text-white">40% OFF</strong> esta semana!
+                </p>
+
+                <div class="flex flex-wrap gap-3">
+                    <a href="#produtos" class="inline-flex items-center gap-2 bg-white text-emerald-900 font-bold px-6 py-3 rounded-xl shadow-lg hover:bg-emerald-50 transition transform active:scale-95 text-sm">
+                        Ver Coleção
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PILARES DE CONFIANÇA -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700/50 flex items-center gap-3">
+                <div class="p-2.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-xs sm:text-sm">Garantia Total</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">30 dias de troca</p>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700/50 flex items-center gap-3">
+                <div class="p-2.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-xs sm:text-sm">Envio Rápido</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Despacho em 24h</p>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700/50 flex items-center gap-3">
+                <div class="p-2.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-xs sm:text-sm">Pagamento Seguro</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Pix ou Cartão</p>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700/50 flex items-center gap-3">
+                <div class="p-2.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-xs sm:text-sm">Suporte 24/7</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Atendimento humanizado</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DE PRODUTOS -->
+    <main id="produtos" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1">
+        
+        <!-- Titulo e Filtros -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <div>
+                <h2 class="text-2xl font-black tracking-tight">Produtos em Destaque</h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400">Confira a nossa seleção escolhida a dedo</p>
+            </div>
+
+            <!-- Filtro de Categoria -->
+            <div class="flex flex-wrap gap-2" id="categoryFilters">
+                <button data-category="todos" class="filter-btn active bg-emerald-600 text-white px-4 py-1.5 rounded-full text-xs font-semibold shadow-sm">Todos</button>
+                <button data-category="acessorios" class="filter-btn bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 px-4 py-1.5 rounded-full text-xs font-semibold">Acessórios</button>
+                <button data-category="eletronicos" class="filter-btn bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 px-4 py-1.5 rounded-full text-xs font-semibold">Eletrónicos</button>
+                <button data-category="vestuario" class="filter-btn bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 px-4 py-1.5 rounded-full text-xs font-semibold">Vestuário</button>
+            </div>
+        </div>
+
+        <!-- Grelha de Produtos -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Os produtos são inseridos dinamicamente pelo JavaScript -->
+        </div>
+    </main>
+
+    <!-- GAVETA DO CARRINHO (SLIDE-OUT) -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
+        <!-- Overlay escuro -->
+        <div id="cartOverlay" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm pointer-events-auto"></div>
+        
+        <!-- Conteúdo do Carrinho -->
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white dark:bg-slate-900 shadow-2xl flex flex-col pointer-events-auto transform translate-x-full transition-transform duration-300" id="cartContent">
+            
+            <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <h3 class="font-bold text-lg flex items-center gap-2">
+                    <span>Meu Carrinho</span>
+                    <span id="cartDrawerCount" class="text-xs bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 font-bold px-2 py-0.5 rounded-full">0 itens</span>
+                </h3>
+                <button id="closeCart" class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <!-- Progresso Frete Grátis -->
+            <div class="p-4 bg-emerald-50 dark:bg-slate-800/50 border-b border-emerald-100 dark:border-slate-800 text-xs">
+                <p id="freeShippingText" class="font-medium text-slate-700 dark:text-slate-300 mb-1">Adicione R$ 199,00 para Frete Grátis</p>
+                <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                    <div id="freeShippingBar" class="bg-emerald-500 h-full w-0 transition-all duration-300"></div>
+                </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            <div id="cartItems" class="flex-1 overflow-y-auto p-4 space-y-4">
+                <!-- Itens dinâmicos -->
+            </div>
+
+            <!-- Rodapé do Carrinho -->
+            <div class="p-4 border-t border-slate-200 dark:border-slate-800 space-y-3">
+                <div class="flex justify-between font-bold text-lg">
+                    <span>Total:</span>
+                    <span id="cartTotal" class="text-emerald-600 dark:text-emerald-400">R$ 0,00</span>
+                </div>
+                <button onclick="alert('Pedido finalizado com sucesso!')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-lg transition active:scale-95 text-center">
+                    Finalizar Compra
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 mt-12 py-8 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 space-y-4">
+            <p class="font-bold text-slate-700 dark:text-slate-300">GBR Store © 2026 - Todos os direitos reservados</p>
+            <div class="flex justify-center gap-4">
+                <span>💳 Pix</span>
+                <span>💳 Cartão de Crédito</span>
+                <span>🔒 Compra Segura</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT DA LOJA -->
+    <script>
+        // Dados dos produtos
+        const products = [
+            { id: 1, name: "Smartwatch Sport v2", category: "eletronicos", price: 299.90, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80", rating: 4.8 },
+            { id: 2, name: "Fone Bluetooth Pro", category: "eletronicos", price: 189.00, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80", rating: 4.9 },
+            { id: 3, name: "Mochila Urbana Impermeável", category: "acessorios", price: 149.90, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80", rating: 4.7 },
+            { id: 4, name: "Óculos de Sol Classic", category: "acessorios", price: 99.90, image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80", rating: 4.6 },
+            { id: 5, name: "Camiseta Algodão Premium", category: "vestuario", price: 79.90, image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80", rating: 4.5 },
+            { id: 6, name: "Tênis Running Ultralight", category: "vestuario", price: 349.90, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80", rating: 5.0 },
+        ];
+
+        let cart = [];
+
+        // Renderizar Produtos
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = items.map(p => `
+                <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700/50 shadow-sm hover:shadow-xl transition duration-300 group flex flex-col">
+                    <div class="relative overflow-hidden aspect-square bg-slate-100 dark:bg-slate-700">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">${p.category}</span>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100 mt-1">${p.name}</h3>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-lg font-black text-slate-900 dark:text-white">R$ ${p.price.toFixed(2)}</span>
+                            <button onclick="addToCart(${p.id})" class="bg-emerald-600 hover:bg-emerald-700 text-white p-2.5 rounded-xl shadow-md transition active:scale-95">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Adicionar ao Carrinho
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty++;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCart();
+            openCart();
+        }
+
+        // Atualizar Carrinho
+        function updateCart() {
+            const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
+            const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+            document.getElementById('cartCount').innerText = totalCount;
+            document.getElementById('cartDrawerCount').innerText = `${totalCount} itens`;
+            document.getElementById('cartTotal').innerText = `R$ ${totalPrice.toFixed(2)}`;
+
+            // Frete Grátis
+            const freeShippingLimit = 199.00;
+            const progress = Math.min((totalPrice / freeShippingLimit) * 100, 100);
+            document.getElementById('freeShippingBar').style.width = `${progress}%`;
+            
+            if (totalPrice >= freeShippingLimit) {
+                document.getElementById('freeShippingText').innerText = "🎉 Parabéns! Você ganhou Frete Grátis!";
+            } else {
+                const diff = freeShippingLimit - totalPrice;
+                document.getElementById('freeShippingText').innerText = `Falta R$ ${diff.toFixed(2)} para Frete Grátis`;
+            }
+
+            // Itens da Lista
+            const container = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                container.innerHTML = `<p class="text-center text-slate-400 py-8 text-sm">Seu carrinho está vazio.</p>`;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-800 p-3 rounded-xl">
+  
