@@ -56,32 +56,11 @@
         </div>
     </header>
 
-    <!-- BANNER PRINCIPAL -->
+    <!-- BANNER PRINCIPAL (IMAGEM COMPLETA) -->
     <section class="max-w-7xl mx-auto px-4 pt-4 pb-4 w-full">
-        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-black via-emerald-950 to-black text-white shadow-xl border border-zinc-800 p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-black/80 pointer-events-none"></div>
-            
-            <div class="relative z-10 max-w-xl">
-                <span class="inline-block bg-emerald-400/15 text-emerald-300 text-xs sm:text-sm font-bold uppercase tracking-widest px-3 py-2 rounded-full mb-4">
-                    GBR STORE • STREETWEAR
-                </span>
-                <h1 class="text-3xl sm:text-5xl font-black tracking-tight mb-4 leading-tight">
-                    VISTA SEU <span class="text-emerald-400">ESTILO.</span><br>
-                    MARQUE SUA PRESENÇA.
-                </h1>
-                <p class="text-sm sm:text-lg text-zinc-300 mb-7">
-                    Tênis, camisas, bermudas e bonés para completar seu visual. Encontre seu estilo na GBR Store!
-                </p>
-                <a href="#produtos" class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold px-6 py-3 rounded-xl transition">
-                    VER COLEÇÃO →
-                </a>
-            </div>
-
-            <!-- Imagem de Destaque no Banner -->
-            <div class="relative z-10 w-full md:w-1/2 flex justify-center">
-                <img src="Banner gbr.jpg" alt="GBR Store Banner" class="rounded-2xl border border-zinc-800 object-cover max-h-80 w-auto shadow-2xl">
-            </div>
-        </div>
+        <a href="#produtos" class="block overflow-hidden rounded-3xl border border-zinc-800 shadow-xl transition transform active:scale-[0.99]">
+            <img src="Banner gbr.jpg" alt="GBR Store Banner" class="w-full h-auto object-cover">
+        </a>
     </section>
 
     <!-- PILARES DE CONFIANÇA -->
@@ -171,5 +150,137 @@
             // Camisas Tailandesas de Time (Promoção)
             { id: 4, name: "Camisa Tailandesa Barcelona", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa Barcelona.png" },
             { id: 5, name: "Camisa Tailandesa Manchester City", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa Manchester city.png" },
-            { id: 6, name: "Camisa Tailandesa Cruzeiro", price: 129.99, originalPrice: 159.99, image: "Camisa tail
-                
+            { id: 6, name: "Camisa Tailandesa Cruzeiro", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa cruzeiro.png" },
+            { id: 7, name: "Camisa Tailandesa França", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa frança.png" }
+        ];
+
+        let cart = [];
+
+        // Renderizar Produtos
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = products.map(p => `
+                <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden flex flex-col justify-between p-3 relative">
+                    ${p.originalPrice ? `<span class="absolute top-2 left-2 bg-emerald-500 text-black text-[10px] font-black px-2 py-0.5 rounded-md z-10">OFERTA</span>` : ''}
+                    <img src="${p.image}" alt="${p.name}" class="w-full aspect-square object-cover rounded-xl mb-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-white mb-1">${p.name}</h3>
+                        <div class="flex items-center justify-between mt-2">
+                            <div>
+                                ${p.originalPrice ? `<span class="text-[11px] text-zinc-500 line-through block">R$ ${p.originalPrice.toFixed(2)}</span>` : ''}
+                                <span class="text-sm font-black text-emerald-400">R$ ${p.price.toFixed(2)}</span>
+                            </div>
+                            <button onclick="addToCart(${p.id})" class="bg-emerald-500 hover:bg-emerald-400 text-black font-bold px-3 py-1.5 rounded-lg text-xs transition">
+                                + Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Adicionar ao carrinho
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty++;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCart();
+            toggleCart(true);
+        }
+
+        // Atualizar valores do carrinho
+        function updateCart() {
+            const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
+            const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+            document.getElementById('cartCount').innerText = totalCount;
+            document.getElementById('cartTotal').innerText = `R$ ${totalPrice.toFixed(2)}`;
+
+            // Progresso de Frete Grátis
+            const limit = 199.00;
+            const progress = Math.min((totalPrice / limit) * 100, 100);
+            document.getElementById('freeShippingBar').style.width = `${progress}%`;
+
+            if (totalPrice >= limit) {
+                document.getElementById('freeShippingText').innerText = "🎉 Parabéns! Você ganhou Frete Grátis!";
+            } else {
+                document.getElementById('freeShippingText').innerText = `Adicione R$ ${(limit - totalPrice).toFixed(2)} para Frete Grátis!`;
+            }
+
+            // Renderizar itens no Modal
+            const itemsContainer = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = '<p class="text-center text-zinc-500 py-8 text-xs">Seu carrinho está vazio.</p>';
+            } else {
+                itemsContainer.innerHTML = cart.map(item => `
+                    <div class="flex items-center justify-between bg-black/50 border border-zinc-800 p-2.5 rounded-xl">
+                        <img src="${item.image}" class="w-10 h-10 rounded-lg object-cover">
+                        <div class="flex-1 px-2">
+                            <h4 class="font-bold text-xs text-white">${item.name}</h4>
+                            <p class="text-[11px] text-emerald-400 font-bold">R$ ${(item.price * item.qty).toFixed(2)}</p>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 bg-zinc-800 hover:bg-zinc-700 rounded flex items-center justify-center text-xs font-bold">-</button>
+                            <span class="text-xs font-bold px-1">${item.qty}</span>
+                            <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 bg-zinc-800 hover:bg-zinc-700 rounded flex items-center justify-center text-xs font-bold">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+            }
+            updateCart();
+        }
+
+        // Abrir/Fechar Carrinho
+        function toggleCart(show) {
+            const modal = document.getElementById('cartModal');
+            if (show) {
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Finalizar Pedido no WhatsApp
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert("Seu carrinho está vazio!");
+                return;
+            }
+
+            const phone = "5511999999999"; // Substitua pelo seu número com DDD
+            let message = "*Novo Pedido - GBR Store*\n\n";
+
+            cart.forEach(item => {
+                message += `• ${item.name} (x${item.qty}) - R$ ${(item.price * item.qty).toFixed(2)}\n`;
+            });
+
+            const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+            message += `\n*Total:* R$ ${totalPrice.toFixed(2)}`;
+
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Eventos
+        document.getElementById('cartBtn').addEventListener('click', () => toggleCart(true));
+        document.getElementById('closeCartBtn').addEventListener('click', () => toggleCart(false));
+
+        // Inicializar Loja
+        renderProducts();
+    </script>
+</body>
+</html>
