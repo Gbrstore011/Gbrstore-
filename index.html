@@ -166,9 +166,29 @@
                     <span>Total:</span>
                     <span id="cartTotal" class="text-emerald-600">R$ 0,00</span>
                 </div>
-                <button onclick="alert('Pedido iniciado com sucesso!')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-lg transition text-center text-sm">
-                    Finalizar Compra
-                </button>
+                function checkoutWhatsApp() {
+  const phone = "5511952884586"; // Seu número configurado
+  
+  if (!cart || cart.length === 0) {
+    alert("Seu carrinho está vazio!");
+    return;
+  }
+
+  let message = "🛒 *Novo Pedido*\n\n";
+  
+  cart.forEach((item, index) => {
+    message += `${index + 1}. *${item.name}* - R$ ${item.price.toFixed(2)}\n`;
+  });
+
+  const total = document.getElementById("cartTotal").innerText;
+  message += `\n💰 *Total:* ${total}\n\n`;
+  message += "Gostaria de combinar o pagamento e a entrega!";
+
+  // Abre o WhatsApp Web / App diretamente
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+}
+
             </div>
         </div>
     </div>
