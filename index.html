@@ -147,10 +147,10 @@
             { id: 2, name: "Boné Oakley Preto", price: 70.00, originalPrice: null, image: "bone_oakley_preto.png" },
             { id: 3, name: "Boné Oakley Verde Oliva", price: 70.00, originalPrice: null, image: "bone_oakley_verde_oliva.png" },
             
-            // Bonés Brooksfield e Lacoste (tentando com extensão .jpg caso sejam fotos)
-            { id: 4, name: "Boné Brooksfield", price: 70.00, originalPrice: null, image: "Bone Brooksfield.jpg" },
-            { id: 5, name: "Boné Lacoste Sport Preto", price: 70.00, originalPrice: null, image: "Bone Lacoste sport preto 2025.jpg" },
-            { id: 6, name: "Boné Lacoste Sport Verde", price: 70.00, originalPrice: null, image: "Bone Lacoste sport verde 2025.jpg" },
+            // Novos Bonés (Com os nomes exatos do GitHub)[span_5](start_span)[span_5](end_span)
+            { id: 4, name: "Boné Brooksfield", price: 70.00, originalPrice: null, image: "Bone_Brooksfield.png" },[span_6](start_span)[span_6](end_span)
+            { id: 5, name: "Boné Lacoste Sport Verde", price: 70.00, originalPrice: null, image: "Bone_Lacoste_sport_verde_2025.png" },[span_7](start_span)[span_7](end_span)
+            { id: 6, name: "Boné Lacoste Sport Preto", price: 70.00, originalPrice: null, image: "Bone_Lacoste_sport_preto_2025.png" },[span_8](start_span)[span_8](end_span)
             
             // Camisas Tailandesas de Time (Promoção)
             { id: 7, name: "Camisa Tailandesa Barcelona", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa Barcelona.png" },
@@ -282,7 +282,7 @@
 
         // Eventos
         document.getElementById('cartBtn').addEventListener('click', () => toggleCart(true));
-        document.getElementById('closeCartBtn', () => toggleCart(false));
+        document.getElementById('closeCartBtn').addEventListener('click', () => toggleCart(false));
 
         // Inicializar Loja
         renderProducts();
