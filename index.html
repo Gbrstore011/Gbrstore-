@@ -160,9 +160,16 @@
     <!-- SCRIPT DA LOJA -->
     <script>
         const products = [
-            { id: 1, name: "Boné Oakley Branco Gelo", price: 70.00, image: "bone_oakley_branco_gelo.png" },
-            { id: 2, name: "Boné Oakley Preto", price: 70.00, image: "bone_oakley_preto.png" },
-            { id: 3, name: "Boné Oakley Verde Oliva", price: 70.00, image: "bone_oakley_verde_oliva.png" }
+            // Bonés Oakley
+            { id: 1, name: "Boné Oakley Branco Gelo", price: 70.00, originalPrice: null, image: "bone_oakley_branco_gelo.png" },
+            { id: 2, name: "Boné Oakley Preto", price: 70.00, originalPrice: null, image: "bone_oakley_preto.png" },
+            { id: 3, name: "Boné Oakley Verde Oliva", price: 70.00, originalPrice: null, image: "bone_oakley_verde_oliva.png" },
+            
+            // Camisas Tailandesas de Time (Promoção)
+            { id: 4, name: "Camisa Tailandesa Barcelona", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa Barcelona.png" },
+            { id: 5, name: "Camisa Tailandesa Manchester City", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa Manchester city.png" },
+            { id: 6, name: "Camisa Tailandesa Cruzeiro", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa cruzeiro.png" },
+            { id: 7, name: "Camisa Tailandesa França", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa frança.png" }
         ];
 
         let cart = [];
@@ -171,12 +178,16 @@
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = products.map(p => `
-                <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden flex flex-col justify-between p-3">
+                <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden flex flex-col justify-between p-3 relative">
+                    ${p.originalPrice ? `<span class="absolute top-2 left-2 bg-emerald-500 text-black text-[10px] font-black px-2 py-0.5 rounded-md z-10">OFERTA</span>` : ''}
                     <img src="${p.image}" alt="${p.name}" class="w-full aspect-square object-cover rounded-xl mb-3">
                     <div>
                         <h3 class="font-bold text-sm text-white mb-1">${p.name}</h3>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm font-black text-emerald-400">R$ ${p.price.toFixed(2)}</span>
+                        <div class="flex items-center justify-between mt-2">
+                            <div>
+                                ${p.originalPrice ? `<span class="text-[11px] text-zinc-500 line-through block">R$ ${p.originalPrice.toFixed(2)}</span>` : ''}
+                                <span class="text-sm font-black text-emerald-400">R$ ${p.price.toFixed(2)}</span>
+                            </div>
                             <button onclick="addToCart(${p.id})" class="bg-emerald-500 hover:bg-emerald-400 text-black font-bold px-3 py-1.5 rounded-lg text-xs transition">
                                 + Add
                             </button>
