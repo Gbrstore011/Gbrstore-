@@ -1,83 +1,251 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GBR Store</title>
+    <title>GBR Store | Streetwear</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0b0e;
+            color: #ffffff;
+            padding-bottom: 50px;
+        }
+
+        /* Barra de avisos topo */
+        .top-bar {
+            background-color: #121216;
+            color: #a1a1aa;
             text-align: center;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #1f1f2e;
         }
 
-        .header-logo {
-            max-width: 120px;
-            border-radius: 50%;
-            margin-bottom: 10px;
+        .top-bar span {
+            color: #22c55e;
+            font-weight: bold;
         }
 
-        .banner {
-            width: 100%;
-            max-width: 800px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            margin-bottom: 30px;
-        }
-
-        .product-grid {
+        /* Header */
+        header {
+            background-color: #121216;
+            padding: 15px 30px;
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #1f1f2e;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-area img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #22c55e;
+        }
+
+        .logo-area span {
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .cart-btn {
+            background-color: #22c55e;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .cart-btn:hover {
+            background-color: #1eb956;
+        }
+
+        /* Banner Principal */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            min-height: 380px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('Banner gbr.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
+            align-items: flex-start;
+            padding: 40px 10%;
+            border-bottom: 2px solid #22c55e;
+        }
+
+        .hero-tag {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: #22c55e;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .hero-banner h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            max-width: 600px;
+        }
+
+        .hero-banner p {
+            color: #d1d5db;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            max-width: 500px;
+        }
+
+        .btn-colecao {
+            background-color: #22c55e;
+            color: #000;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .btn-colecao:hover {
+            background-color: #1eb956;
+        }
+
+        /* Diferenciais */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .feature-item {
+            background-color: #121216;
+            border: 1px solid #1f1f2e;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-item strong {
+            font-size: 0.9rem;
+            display: block;
+        }
+
+        .feature-item span {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        /* Seção Produtos */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            border-left: 4px solid #22c55e;
+            padding-left: 12px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 20px;
         }
 
         .product-card {
-            background-color: #1e1e1e;
-            border: 1px solid #333;
-            border-radius: 8px;
-            width: 220px;
-            padding: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            background-color: #141419;
+            border: 1px solid #1f1f2e;
+            border-radius: 10px;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: #22c55e;
         }
 
         .product-card img {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
-            border-radius: 6px;
+            background-color: #1a1a24;
         }
 
-        .product-card h3 {
-            font-size: 16px;
-            margin: 15px 0 10px 0;
+        .product-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
         }
 
-        .price {
-            font-size: 18px;
-            font-weight: bold;
-            color: #25d366;
-            margin-bottom: 15px;
+        .product-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #f3f4f6;
+        }
+
+        .product-price {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #22c55e;
+            margin-bottom: 12px;
         }
 
         .btn-buy {
-            background-color: #25d366;
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
             width: 100%;
-            box-sizing: border-box;
+            background-color: #22c55e;
+            color: #000;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            transition: 0.2s;
         }
 
         .btn-buy:hover {
@@ -87,86 +255,152 @@
 </head>
 <body>
 
-    <img src="gbr_store_logo.png" alt="GBR Store" class="header-logo">
-    <img src="Banner gbr.jpg" alt="Banner GBR Store" class="banner">
+    <!-- Top Bar -->
+    <div class="top-bar">
+        ⚡ Frete Grátis nas compras acima de R$ 150 | Use o cupom <span>GBR10</span> para 10% OFF.
+    </div>
 
-    <h1>Nossos Produtos</h1>
-
-    <div class="product-grid">
-
-        <!-- Novos Bonés -->
-        <div class="product-card">
-            <img src="Boné Brooksfield.png" alt="Boné Brooksfield">
-            <h3>Boné Brooksfield</h3>
-            <p class="price">R$ 70,00</p>
-            <a href="https://wa.me/?text=Tenho%20interesse%20no%20Boné%20Brooksfield" class="btn-buy" target="_blank">Comprar</a>
+    <!-- Header -->
+    <header>
+        <div class="logo-area">
+            <img src="gbr_store_logo.png" alt="Logo GBR Store">
+            <span>GBR STORE</span>
         </div>
+        <button class="cart-btn">
+            🛒 Carrinho
+        </button>
+    </header>
 
-        <div class="product-card">
-            <img src="Boné Lacoste sport preto 2025.png" alt="Boné Lacoste Sport Preto">
-            <h3>Boné Lacoste Sport Preto 2025</h3>
-            <p class="price">R$ 70,00</p>
-            <a href="https://wa.me/?text=Tenho%20interesse%20no%20Boné%20Lacoste%20Sport%20Preto" class="btn-buy" target="_blank">Comprar</a>
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <span class="hero-tag">GBR STORE / STREETWEAR</span>
+        <h1>VISTA SEU ESTILO.<br>MARQUE SUA PRESENÇA.</h1>
+        <p>Tênis, camisas, bermudas e bonés para completar seu visual. Encontre seu estilo na GBR Store!</p>
+        <a href="#produtos" class="btn-colecao">VER COLEÇÃO</a>
+    </section>
+
+    <!-- Diferenciais -->
+    <div class="features">
+        <div class="feature-item">
+            <div>
+                <strong>Envio Rápido</strong>
+                <span>Postagem em 24h</span>
+            </div>
         </div>
-
-        <div class="product-card">
-            <img src="Boné Lacoste sport verde 2025.png" alt="Boné Lacoste Sport Verde">
-            <h3>Boné Lacoste Sport Verde 2025</h3>
-            <p class="price">R$ 70,00</p>
-            <a href="https://wa.me/?text=Tenho%20interesse%20no%20Boné%20Lacoste%20Sport%20Verde" class="btn-buy" target="_blank">Comprar</a>
+        <div class="feature-item">
+            <div>
+                <strong>Pagamento Seguro</strong>
+                <span>Pix ou Cartão</span>
+            </div>
         </div>
-
-        <!-- Bonés Oakley -->
-        <div class="product-card">
-            <img src="bone_oakley_branco_gelo.png" alt="Boné Oakley Branco Gelo">
-            <h3>Boné Oakley Branco Gelo</h3>
-            <p class="price">R$ 70,00</p>
-            <a href="https://wa.me/?text=Tenho%20interesse%20no%20Boné%20Oakley%20Branco%20Gelo" class="btn-buy" target="_blank">Comprar</a>
+        <div class="feature-item">
+            <div>
+                <strong>Suporte 24/7</strong>
+                <span>Atendimento via WhatsApp</span>
+            </div>
         </div>
+    </div>
 
-        <div class="product-card">
-            <img src="bone_oakley_preto.png" alt="Boné Oakley Preto">
-            <h3>Boné Oakley Preto</h3>
-            <p class="price">R$ 70,00</p>
-            <a href="https://wa.me/?text=Tenho%20interesse%20no%20Boné%20Oakley%20Preto" class="btn-buy" target="_blank">Comprar</a>
+    <!-- Produtos -->
+    <div class="container" id="produtos">
+        <h2 class="section-title">Produtos em Destaque</h2>
+
+        <div class="products-grid">
+
+            <!-- Novos Bonés Adicionados -->
+            <div class="product-card">
+                <img src="Boné Brooksfield.png" alt="Boné Brooksfield">
+                <div class="product-info">
+                    <div class="product-name">Boné Brooksfield</div>
+                    <div class="product-price">R$ 70,00</div>
+                    <a href="https://wa.me/?text=Olá,%20tenho%20interesse%20no%20Boné%20Brooksfield" target="_blank" class="btn-buy">Comprar</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="Boné Lacoste sport preto 2025.png" alt="Boné Lacoste Sport Preto 2025">
+                <div class="product-info">
+                    <div class="product-name">Boné Lacoste Sport Preto 2025</div>
+                    <div class="product-price">R$ 70,00</div>
+                    <a href="https://wa.me/?text=Olá,%20tenho%20interesse%20no%20Boné%20Lacoste%20Sport%20Preto%202025" target="_blank" class="btn-buy">Comprar</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="Boné Lacoste sport verde 2025.png" alt="Boné Lacoste Sport Verde 2025">
+                <div class="product-info">
+                    <div class="product-name">Boné Lacoste Sport Verde 2025</div>
+                    <div class="product-price">R$ 70,00</div>
+                    <a href="https://wa.me/?text=Olá,%20tenho%20interesse%20no%20Boné%20Lacoste%20Sport%20Verde%202025" target="_blank" class="btn-buy">Comprar</a>
+                </div>
+            </div>
+
+            <!-- Bonés Oakley -->
+            <div class="product-card">
+                <img src="bone_oakley_branco_gelo.png" alt="Boné Oakley Branco Gelo">
+                <div class="product-info">
+                    <div class="product-name">Boné Oakley Branco Gelo</div>
+                    <div class="product-price">R$ 70,00</div>
+                    <a href="https://wa.me/?text=Olá,%20tenho%20interesse%20no%20Boné%20Oakley%20Branco%20Gelo" target="_blank" class="btn-buy">Comprar</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="bone_oakley_preto.png" alt="Boné Oakley Preto">
+                <div class="product-info">
+                    <div class="product-name">Boné Oakley Preto</div>
+                    <div class="product-price">R$ 70,00</div>
+                    <a href="https://wa.me/?text=Olá,%20tenho%20interesse%20no%20Boné%20Oakley%20Preto" target="_blank" class="btn-buy">Comprar</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="bone_oakley_verde_oliva.png" alt="Boné Oakley Verde Oliva">
+                <div class="product-info">
+                    <div class="product-name">Boné Oakley Verde Oliva</div>
+                    <div class="product-price">R$ 70,00</div>
+                    <a href="https://wa.me/?text=Olá,%20tenho%20interesse%20no%20Boné%20Oakley%20Verde%20Oliva" target="_blank" class="btn-buy">Comprar</a>
+                </div>
+            </div>
+
+            <!-- Camisas Tailandesas -->
+            <div class="product-card">
+                <img src="Camisa tailandesa Barcelona.png" alt="Camisa Tailandesa Barcelona">
+                <div class="product-info">
+                    <div class="product-name">Camisa Tailandesa Barcelona</div>
+                    <div class="product-price">R$ 130,00</div>
+                    <a href="https://wa.me/?text=Olá,%20tenho%20interesse%20na%20Camisa%20Tailandesa%20Barcelona" target="_blank" class="btn-buy">Comprar</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="Camisa tailandesa Manchester d.png" alt="Camisa Tailandesa Manchester">
+                <div class="product-info">
+                    <div class="product-name">Camisa Tailandesa Manchester</div>
+                    <div class="product-price">R$ 130,00</div>
+                    <a href="https://wa.me/?text=Olá,%20tenho%20interesse%20na%20Camisa%20Tailandesa%20Manchester" target="_blank" class="btn-buy">Comprar</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="Camisa tailandesa cruzeiro.png" alt="Camisa Tailandesa Cruzeiro">
+                <div class="product-info">
+                    <div class="product-name">Camisa Tailandesa Cruzeiro</div>
+                    <div class="product-price">R$ 130,00</div>
+                    <a href="https://wa.me/?text=Olá,%20tenho%20interesse%20na%20Camisa%20Tailandesa%20Cruzeiro" target="_blank" class="btn-buy">Comprar</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="Camisa tailandess frança.png" alt="Camisa Tailandesa França">
+                <div class="product-info">
+                    <div class="product-name">Camisa Tailandesa França</div>
+                    <div class="product-price">R$ 130,00</div>
+                    <a href="https://wa.me/?text=Olá,%20tenho%20interesse%20na%20Camisa%20Tailandesa%20França" target="_blank" class="btn-buy">Comprar</a>
+                </div>
+            </div>
+
         </div>
-
-        <div class="product-card">
-            <img src="bone_oakley_verde_oliva.png" alt="Boné Oakley Verde Oliva">
-            <h3>Boné Oakley Verde Oliva</h3>
-            <p class="price">R$ 70,00</p>
-            <a href="https://wa.me/?text=Tenho%20interesse%20no%20Boné%20Oakley%20Verde%20Oliva" class="btn-buy" target="_blank">Comprar</a>
-        </div>
-
-        <!-- Camisas Tailandesas -->
-        <div class="product-card">
-            <img src="Camisa tailandesa Barcelona.png" alt="Camisa Tailandesa Barcelona">
-            <h3>Camisa Tailandesa Barcelona</h3>
-            <p class="price">R$ 130,00</p>
-            <a href="https://wa.me/?text=Tenho%20interesse%20na%20Camisa%20Tailandesa%20Barcelona" class="btn-buy" target="_blank">Comprar</a>
-        </div>
-
-        <div class="product-card">
-            <img src="Camisa tailandesa Manchester d.png" alt="Camisa Tailandesa Manchester">
-            <h3>Camisa Tailandesa Manchester</h3>
-            <p class="price">R$ 130,00</p>
-            <a href="https://wa.me/?text=Tenho%20interesse%20na%20Camisa%20Tailandesa%20Manchester" class="btn-buy" target="_blank">Comprar</a>
-        </div>
-
-        <div class="product-card">
-            <img src="Camisa tailandesa cruzeiro.png" alt="Camisa Tailandesa Cruzeiro">
-            <h3>Camisa Tailandesa Cruzeiro</h3>
-            <p class="price">R$ 130,00</p>
-            <a href="https://wa.me/?text=Tenho%20interesse%20na%20Camisa%20Tailandesa%20Cruzeiro" class="btn-buy" target="_blank">Comprar</a>
-        </div>
-
-        <div class="product-card">
-            <img src="Camisa tailandess frança.png" alt="Camisa Tailandesa França">
-            <h3>Camisa Tailandesa França</h3>
-            <p class="price">R$ 130,00</p>
-            <a href="https://wa.me/?text=Tenho%20interesse%20na%20Camisa%20Tailandesa%20França" class="btn-buy" target="_blank">Comprar</a>
-        </div>
-
     </div>
 
 </body>
