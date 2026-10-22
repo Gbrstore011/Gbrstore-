@@ -142,17 +142,12 @@
     <!-- SCRIPT DA LOJA -->
     <script>
         const products = [
-            // Bonés Oakley
             { id: 1, name: "Boné Oakley Branco Gelo", price: 70.00, originalPrice: null, image: "bone_oakley_branco_gelo.png" },
             { id: 2, name: "Boné Oakley Preto", price: 70.00, originalPrice: null, image: "bone_oakley_preto.png" },
             { id: 3, name: "Boné Oakley Verde Oliva", price: 70.00, originalPrice: null, image: "bone_oakley_verde_oliva.png" },
-            
-            // Novos Bonés (Com os nomes exatos do GitHub)[span_5](start_span)[span_5](end_span)
-            { id: 4, name: "Boné Brooksfield", price: 70.00, originalPrice: null, image: "Bone_Brooksfield.png" },[span_6](start_span)[span_6](end_span)
-            { id: 5, name: "Boné Lacoste Sport Verde", price: 70.00, originalPrice: null, image: "Bone_Lacoste_sport_verde_2025.png" },[span_7](start_span)[span_7](end_span)
-            { id: 6, name: "Boné Lacoste Sport Preto", price: 70.00, originalPrice: null, image: "Bone_Lacoste_sport_preto_2025.png" },[span_8](start_span)[span_8](end_span)
-            
-            // Camisas Tailandesas de Time (Promoção)
+            { id: 4, name: "Boné Brooksfield", price: 70.00, originalPrice: null, image: "Bone_Brooksfield.png" },
+            { id: 5, name: "Boné Lacoste Sport Verde", price: 70.00, originalPrice: null, image: "Bone_Lacoste_sport_verde_2025.png" },
+            { id: 6, name: "Boné Lacoste Sport Preto", price: 70.00, originalPrice: null, image: "Bone_Lacoste_sport_preto_2025.png" },
             { id: 7, name: "Camisa Tailandesa Barcelona", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa Barcelona.png" },
             { id: 8, name: "Camisa Tailandesa Manchester City", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa Manchester city.png" },
             { id: 9, name: "Camisa Tailandesa Cruzeiro", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa cruzeiro.png" },
@@ -161,7 +156,6 @@
 
         let cart = [];
 
-        // Renderizar Produtos
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = products.map(p => `
@@ -184,7 +178,6 @@
             `).join('');
         }
 
-        // Adicionar ao carrinho
         function addToCart(id) {
             const product = products.find(p => p.id === id);
             const item = cart.find(i => i.id === id);
@@ -197,7 +190,6 @@
             toggleCart(true);
         }
 
-        // Atualizar valores do carrinho
         function updateCart() {
             const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
             const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
@@ -205,7 +197,6 @@
             document.getElementById('cartCount').innerText = totalCount;
             document.getElementById('cartTotal').innerText = `R$ ${totalPrice.toFixed(2)}`;
 
-            // Progresso de Frete Grátis
             const limit = 199.00;
             const progress = Math.min((totalPrice / limit) * 100, 100);
             document.getElementById('freeShippingBar').style.width = `${progress}%`;
@@ -216,7 +207,6 @@
                 document.getElementById('freeShippingText').innerText = `Adicione R$ ${(limit - totalPrice).toFixed(2)} para Frete Grátis!`;
             }
 
-            // Renderizar itens no Modal
             const itemsContainer = document.getElementById('cartItems');
             if (cart.length === 0) {
                 itemsContainer.innerHTML = '<p class="text-center text-zinc-500 py-8 text-xs">Seu carrinho está vazio.</p>';
@@ -249,7 +239,6 @@
             updateCart();
         }
 
-        // Abrir/Fechar Carrinho
         function toggleCart(show) {
             const modal = document.getElementById('cartModal');
             if (show) {
@@ -259,7 +248,6 @@
             }
         }
 
-        // Finalizar Pedido no WhatsApp
         function checkoutWhatsApp() {
             if (cart.length === 0) {
                 alert("Seu carrinho está vazio!");
@@ -280,11 +268,9 @@
             window.open(url, '_blank');
         }
 
-        // Eventos
         document.getElementById('cartBtn').addEventListener('click', () => toggleCart(true));
         document.getElementById('closeCartBtn').addEventListener('click', () => toggleCart(false));
 
-        // Inicializar Loja
         renderProducts();
     </script>
 </body>
