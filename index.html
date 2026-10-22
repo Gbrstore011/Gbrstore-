@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,10 +48,6 @@
 </a>
 
             <div class="flex items-center gap-3">
-                <!-- Botão Modo Escuro -->
-                <button id="themeToggle" class="p-2.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-lg cursor-pointer">
-                    🌙
-                </button>
 
                 <!-- Botão Carrinho -->
                 <button id="cartBtn" class="relative px-4 py-2 bg-emerald-500 text-white rounded-full font-bold shadow-md hover:bg-emerald-600 active:scale-95 transition flex items-center gap-2 cursor-pointer">
@@ -318,10 +314,6 @@
         document.getElementById('cartBtn').addEventListener('click', () => toggleCart(true));
         document.getElementById('closeCartBtn').addEventListener('click', () => toggleCart(false));
         
-        // Tema Escuro
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-        });
 
         // Inicializar Loja
         renderProducts();
