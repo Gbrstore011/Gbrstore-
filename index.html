@@ -136,4 +136,158 @@
                 <div class="mb-4">
                     <p id="freeShippingText" class="text-xs mb-1 font-semibold text-emerald-400"></p>
                     <div class="w-full bg-zinc-800 rounded-full h-2 overflow-hidden">
-                        <div id="freeShippingBar" class="bg-emerald-500 h-2 rounded-full transition-all
+                        <div id="freeShippingBar" class="bg-emerald-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div id="cartItems" class="space-y-3 max-h-[60vh] overflow-y-auto pr-1">
+                    <!-- Itens do Carrinho via JS -->
+                </div>
+            </div>
+
+            <div class="border-t border-zinc-800 pt-4 mt-auto">
+                <div class="flex justify-between text-lg font-bold mb-4">
+                    <span>Total:</span>
+                    <span id="cartTotal" class="text-emerald-400">R$ 0.00</span>
+                </div>
+                <button onclick="checkoutWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-black font-extrabold py-3 rounded-xl transition flex items-center justify-center gap-2">
+                    <span>Finalizar Pedido via WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT DA LOJA -->
+    <script>
+        const products = [
+            { id: 1, name: "Boné Oakley Branco Gelo", price: 70.00, image: "bone_oakley_branco_gelo.png" },
+            { id: 2, name: "Boné Oakley Preto", price: 70.00, image: "bone_oakley_preto.png" },
+            { id: 3, name: "Boné Oakley Verde Oliva", price: 70.00, image: "bone_oakley_verde_oliva.png" }
+        ];
+
+        let cart = [];
+
+        // Renderizar Produtos
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = products.map(p => `
+                <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden flex flex-col justify-between p-3">
+                    <img src="${p.image}" alt="${p.name}" class="w-full aspect-square object-cover rounded-xl mb-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-white mb-1">${p.name}</h3>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-black text-emerald-400">R$ ${p.price.toFixed(2)}</span>
+                            <button onclick="addToCart(${p.id})" class="bg-emerald-500 hover:bg-emerald-400 text-black font-bold px-3 py-1.5 rounded-lg text-xs transition">
+                                + Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Adicionar ao carrinho
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty++;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCart();
+            toggleCart(true);
+        }
+
+        // Atualizar valores do carrinho
+        function updateCart() {
+            const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
+            const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+            document.getElementById('cartCount').innerText = totalCount;
+            document.getElementById('cartTotal').innerText = `R$ ${totalPrice.toFixed(2)}`;
+
+            // Progresso de Frete Grátis
+            const limit = 199.00;
+            const progress = Math.min((totalPrice / limit) * 100, 100);
+            document.getElementById('freeShippingBar').style.width = `${progress}%`;
+
+            if (totalPrice >= limit) {
+                document.getElementById('freeShippingText').innerText = "🎉 Parabéns! Você ganhou Frete Grátis!";
+            } else {
+                document.getElementById('freeShippingText').innerText = `Adicione R$ ${(limit - totalPrice).toFixed(2)} para Frete Grátis!`;
+            }
+
+            // Renderizar itens no Modal
+            const itemsContainer = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = '<p class="text-center text-zinc-500 py-8 text-xs">Seu carrinho está vazio.</p>';
+            } else {
+                itemsContainer.innerHTML = cart.map(item => `
+                    <div class="flex items-center justify-between bg-black/50 border border-zinc-800 p-2.5 rounded-xl">
+                        <img src="${item.image}" class="w-10 h-10 rounded-lg object-cover">
+                        <div class="flex-1 px-2">
+                            <h4 class="font-bold text-xs text-white">${item.name}</h4>
+                            <p class="text-[11px] text-emerald-400 font-bold">R$ ${(item.price * item.qty).toFixed(2)}</p>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 bg-zinc-800 hover:bg-zinc-700 rounded flex items-center justify-center text-xs font-bold">-</button>
+                            <span class="text-xs font-bold px-1">${item.qty}</span>
+                            <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 bg-zinc-800 hover:bg-zinc-700 rounded flex items-center justify-center text-xs font-bold">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+            }
+            updateCart();
+        }
+
+        // Abrir/Fechar Carrinho
+        function toggleCart(show) {
+            const modal = document.getElementById('cartModal');
+            if (show) {
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Finalizar Pedido no WhatsApp
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert("Seu carrinho está vazio!");
+                return;
+            }
+
+            const phone = "5511999999999"; // Substitua pelo seu número com DDD se necessário
+            let message = "*Novo Pedido - GBR Store*\n\n";
+
+            cart.forEach(item => {
+                message += `• ${item.name} (x${item.qty}) - R$ ${(item.price * item.qty).toFixed(2)}\n`;
+            });
+
+            const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+            message += `\n*Total:* R$ ${totalPrice.toFixed(2)}`;
+
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Eventos
+        document.getElementById('cartBtn').addEventListener('click', () => toggleCart(true));
+        document.getElementById('closeCartBtn').addEventListener('click', () => toggleCart(false));
+
+        // Inicializar Loja
+        renderProducts();
+    </script>
+</body>
+</html>
