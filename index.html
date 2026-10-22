@@ -1,485 +1,286 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GBR STORE | STREETWEAR</title>
+    <title>GBR Store - Loja Virtual</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #0b0b0e;
-            color: #ffffff;
-            padding-bottom: 50px;
-        }
-
-        /* Top Bar */
-        .top-bar {
-            background-color: #121216;
-            color: #a1a1aa;
-            text-align: center;
-            padding: 8px 15px;
-            font-size: 0.85rem;
-            border-bottom: 1px solid #1f1f2e;
-        }
-
-        .top-bar span {
-            color: #22c55e;
-            font-weight: bold;
-        }
-
-        /* Header */
-        header {
-            background-color: #121216;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #1f1f2e;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-area img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #22c55e;
-        }
-
-        .logo-area span {
-            font-weight: 800;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-        }
-
-        .cart-btn {
-            background-color: #22c55e;
-            color: #000;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .cart-btn:hover {
-            background-color: #1eb956;
-        }
-
-        /* Banner Principal */
-        .hero-banner {
-            position: relative;
-            width: 100%;
-            min-height: 380px;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('Banner%20gbr.jpg') no-repeat center center;
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 40px 10%;
-            border-bottom: 2px solid #22c55e;
-        }
-
-        .hero-tag {
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            color: #22c55e;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .hero-banner h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 15px;
-            max-width: 600px;
-        }
-
-        .hero-banner p {
-            color: #d1d5db;
-            font-size: 1rem;
-            margin-bottom: 25px;
-            max-width: 500px;
-        }
-
-        .btn-colecao {
-            background-color: #22c55e;
-            color: #000;
-            padding: 12px 25px;
-            border-radius: 6px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-
-        .btn-colecao:hover {
-            background-color: #1eb956;
-        }
-
-        /* Diferenciais */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .feature-item {
-            background-color: #121216;
-            border: 1px solid #1f1f2e;
-            padding: 15px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .feature-item strong {
-            font-size: 0.9rem;
-            display: block;
-        }
-
-        .feature-item span {
-            font-size: 0.75rem;
-            color: #9ca3af;
-        }
-
-        /* Produtos */
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            font-size: 1.6rem;
-            margin-bottom: 25px;
-            font-weight: 800;
-            border-left: 4px solid #22c55e;
-            padding-left: 12px;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .product-card {
-            background-color: #141419;
-            border: 1px solid #1f1f2e;
-            border-radius: 10px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-4px);
-            border-color: #22c55e;
-        }
-
-        .product-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            background-color: #1a1a24;
-        }
-
-        .product-info {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
-
-        .product-name {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #f3f4f6;
-        }
-
-        .price-box {
-            margin-bottom: 12px;
-        }
-
-        .old-price {
-            font-size: 0.85rem;
-            color: #71717a;
-            text-decoration: line-through;
-            margin-right: 6px;
-        }
-
-        .product-price {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: #22c55e;
-            display: inline-block;
-        }
-
-        .btn-buy {
-            width: 100%;
-            background-color: #22c55e;
-            color: #000;
-            border: none;
-            padding: 10px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            display: block;
-            transition: 0.2s;
-        }
-
-        .btn-buy:hover {
-            background-color: #1eb956;
-        }
-
-        /* Botão Flutuante do WhatsApp */
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25d366;
-            color: #fff;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-        }
-
-        .whatsapp-float:hover {
-            background-color: #128c7e;
-        }
+        body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body>
+<body class="bg-black text-white transition-colors duration-300 min-h-screen flex flex-col">
 
-    <!-- Top Bar -->
-    <div class="top-bar">
-        ⚡ Frete Grátis nas compras acima de R$ 150 | Use o cupom <span>GBR10</span> para 10% OFF.
+    <!-- BARRA SUPERIOR -->
+    <div class="bg-emerald-600 text-white text-xs sm:text-sm py-2 px-4 text-center font-medium">
+        ⚡ Frete Grátis em compras acima de R$ 199! Use o cupom <span class="underline font-bold">GBR10</span> para 10% OFF.
     </div>
 
-    <!-- Header -->
-    <header>
-        <div class="logo-area">
-            <img src="gbr_store_logo.png" alt="Logo GBR Store">
-            <span>GBR STORE</span>
+    <!-- CABEÇALHO -->
+    <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+            
+            <a href="#" class="flex items-center">
+                <img src="gbr_store_logo.png" alt="GBR Store" class="h-16 w-auto object-contain">
+            </a>
+
+            <div class="flex items-center gap-3">
+                <!-- Botão Carrinho -->
+                <button id="cartBtn" class="relative px-4 py-2 bg-emerald-500 text-white rounded-full font-bold shadow-md hover:bg-emerald-600 transition">
+                    <span>🛒 Carrinho</span>
+                    <span id="cartCount" class="bg-white text-emerald-700 text-xs font-black px-2 py-0.5 rounded-full ml-1">0</span>
+                </button>
+            </div>
         </div>
-        <button class="cart-btn" onclick="abrirWhatsApp()">
-            🛒 Carrinho
-        </button>
     </header>
 
-    <!-- Hero Banner -->
-    <section class="hero-banner">
-        <span class="hero-tag">GBR STORE / STREETWEAR</span>
-        <h1>VISTA SEU ESTILO.<br>MARQUE SUA PRESENÇA.</h1>
-        <p>Tênis, camisas, bermudas e bonés para completar seu visual. Encontre seu estilo na GBR Store!</p>
-        <a href="#produtos" class="btn-colecao">VER COLEÇÃO</a>
+    <!-- BANNER PRINCIPAL -->
+    <section class="max-w-7xl mx-auto px-4 pt-4 pb-4 w-full">
+        <a href="#produtos" class="block overflow-hidden rounded-3xl border border-zinc-800 shadow-xl transition transform active:scale-[0.99]">
+            <img src="Banner gbr.jpg" alt="GBR Store Banner" class="w-full h-auto object-cover">
+        </a>
     </section>
 
-    <!-- Diferenciais -->
-    <div class="features">
-        <div class="feature-item">
-            <div>
-                <strong>Envio Rápido</strong>
-                <span>Postagem em 24h</span>
+    <!-- PILARES DE CONFIANÇA -->
+    <section class="max-w-7xl mx-auto px-4 py-6 w-full">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="bg-zinc-900/80 border border-zinc-800 p-3 rounded-2xl flex items-center gap-3">
+                <span class="text-xl">✅</span>
+                <div>
+                    <h4 class="font-bold text-xs">Garantia Total</h4>
+                    <p class="text-[10px] text-zinc-400">30 dias de troca</p>
+                </div>
+            </div>
+            <div class="bg-zinc-900/80 border border-zinc-800 p-3 rounded-2xl flex items-center gap-3">
+                <span class="text-xl">⚡</span>
+                <div>
+                    <h4 class="font-bold text-xs">Envio Rápido</h4>
+                    <p class="text-[10px] text-zinc-400">Despacho em 24h</p>
+                </div>
+            </div>
+            <div class="bg-zinc-900/80 border border-zinc-800 p-3 rounded-2xl flex items-center gap-3">
+                <span class="text-xl">🔒</span>
+                <div>
+                    <h4 class="font-bold text-xs">Pagamento Seguro</h4>
+                    <p class="text-[10px] text-zinc-400">Pix ou Cartão</p>
+                </div>
+            </div>
+            <div class="bg-zinc-900/80 border border-zinc-800 p-3 rounded-2xl flex items-center gap-3">
+                <span class="text-xl">🎧</span>
+                <div>
+                    <h4 class="font-bold text-xs">Suporte 24/7</h4>
+                    <p class="text-[10px] text-zinc-400">Atendimento fácil</p>
+                </div>
             </div>
         </div>
-        <div class="feature-item">
-            <div>
-                <strong>Pagamento Seguro</strong>
-                <span>Pix ou Cartão</span>
-            </div>
+    </section>
+
+    <!-- PRODUTOS -->
+    <main id="produtos" class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full">
+        <h2 class="text-2xl font-bold mb-6">Produtos em Destaque</h2>
+        <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- Injetado via JS -->
         </div>
-        <div class="feature-item">
+    </main>
+
+    <!-- MODAL DO CARRINHO -->
+    <div id="cartModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex justify-end">
+        <div class="bg-zinc-900 w-full max-w-md h-full flex flex-col justify-between p-6 border-l border-zinc-800">
             <div>
-                <strong>Suporte 24/7</strong>
-                <span>Atendimento via WhatsApp</span>
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Seu Carrinho</h3>
+                    <button id="closeCartBtn" class="text-zinc-400 hover:text-white font-bold text-xl">✕</button>
+                </div>
+
+                <!-- Barra de Frete Grátis -->
+                <div class="mb-4">
+                    <p id="freeShippingText" class="text-xs mb-1 font-semibold text-emerald-400"></p>
+                    <div class="w-full bg-zinc-800 rounded-full h-2 overflow-hidden">
+                        <div id="freeShippingBar" class="bg-emerald-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div id="cartItems" class="space-y-3 max-h-[60vh] overflow-y-auto pr-1">
+                    <!-- Itens do Carrinho via JS -->
+                </div>
+            </div>
+
+            <div class="border-t border-zinc-800 pt-4 mt-auto">
+                <div class="flex justify-between text-lg font-bold mb-4">
+                    <span>Total:</span>
+                    <span id="cartTotal" class="text-emerald-400">R$ 0.00</span>
+                </div>
+                <button onclick="checkoutWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-black font-extrabold py-3 rounded-xl transition flex items-center justify-center gap-2">
+                    <span>Finalizar Pedido via WhatsApp</span>
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Produtos -->
-    <div class="container" id="produtos">
-        <h2 class="section-title">Produtos em Destaque</h2>
-
-        <div class="products-grid">
-
-            <!-- Novos Bonés -->
-            <div class="product-card">
-                <img src="Bon%C3%A9%20Brooksfield.png" alt="Boné Brooksfield">
-                <div class="product-info">
-                    <div class="product-name">Boné Brooksfield</div>
-                    <div class="price-box">
-                        <span class="product-price">R$ 70,00</span>
-                    </div>
-                    <button class="btn-buy" onclick="comprar('Boné Brooksfield', 'R$ 70,00')">Comprar</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="Bon%C3%A9%20Lacoste%20sport%20preto%202025.png" alt="Boné Lacoste Sport Preto 2025">
-                <div class="product-info">
-                    <div class="product-name">Boné Lacoste Sport Preto 2025</div>
-                    <div class="price-box">
-                        <span class="product-price">R$ 70,00</span>
-                    </div>
-                    <button class="btn-buy" onclick="comprar('Boné Lacoste Sport Preto 2025', 'R$ 70,00')">Comprar</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="Bon%C3%A9%20Lacoste%20sport%20verde%202025.png" alt="Boné Lacoste Sport Verde 2025">
-                <div class="product-info">
-                    <div class="product-name">Boné Lacoste Sport Verde 2025</div>
-                    <div class="price-box">
-                        <span class="product-price">R$ 70,00</span>
-                    </div>
-                    <button class="btn-buy" onclick="comprar('Boné Lacoste Sport Verde 2025', 'R$ 70,00')">Comprar</button>
-                </div>
-            </div>
-
-            <!-- Bonés Oakley -->
-            <div class="product-card">
-                <img src="bone_oakley_branco_gelo.png" alt="Boné Oakley Branco Gelo">
-                <div class="product-info">
-                    <div class="product-name">Boné Oakley Branco Gelo</div>
-                    <div class="price-box">
-                        <span class="product-price">R$ 70,00</span>
-                    </div>
-                    <button class="btn-buy" onclick="comprar('Boné Oakley Branco Gelo', 'R$ 70,00')">Comprar</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="bone_oakley_preto.png" alt="Boné Oakley Preto">
-                <div class="product-info">
-                    <div class="product-name">Boné Oakley Preto</div>
-                    <div class="price-box">
-                        <span class="product-price">R$ 70,00</span>
-                    </div>
-                    <button class="btn-buy" onclick="comprar('Boné Oakley Preto', 'R$ 70,00')">Comprar</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="bone_oakley_verde_oliva.png" alt="Boné Oakley Verde Oliva">
-                <div class="product-info">
-                    <div class="product-name">Boné Oakley Verde Oliva</div>
-                    <div class="price-box">
-                        <span class="product-price">R$ 70,00</span>
-                    </div>
-                    <button class="btn-buy" onclick="comprar('Boné Oakley Verde Oliva', 'R$ 70,00')">Comprar</button>
-                </div>
-            </div>
-
-            <!-- Camisas Tailandesas -->
-            <div class="product-card">
-                <img src="Camisa%20tailandesa%20Barcelona.png" alt="Camisa Tailandesa Barcelona">
-                <div class="product-info">
-                    <div class="product-name">Camisa Tailandesa Barcelona</div>
-                    <div class="price-box">
-                        <span class="old-price">R$ 159,99</span>
-                        <span class="product-price">R$ 129,99</span>
-                    </div>
-                    <button class="btn-buy" onclick="comprar('Camisa Tailandesa Barcelona', 'R$ 129,99')">Comprar</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="Camisa%20tailandesa%20Manchester%20d.png" alt="Camisa Tailandesa Manchester City">
-                <div class="product-info">
-                    <div class="product-name">Camisa Tailandesa Manchester City</div>
-                    <div class="price-box">
-                        <span class="old-price">R$ 159,99</span>
-                        <span class="product-price">R$ 129,99</span>
-                    </div>
-                    <button class="btn-buy" onclick="comprar('Camisa Tailandesa Manchester City', 'R$ 129,99')">Comprar</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="Camisa%20tailandesa%20cruzeiro.png" alt="Camisa Tailandesa Cruzeiro">
-                <div class="product-info">
-                    <div class="product-name">Camisa Tailandesa Cruzeiro</div>
-                    <div class="price-box">
-                        <span class="old-price">R$ 159,99</span>
-                        <span class="product-price">R$ 129,99</span>
-                    </div>
-                    <button class="btn-buy" onclick="comprar('Camisa Tailandesa Cruzeiro', 'R$ 129,99')">Comprar</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="Camisa%20tailandess%20fran%C3%A7a.png" alt="Camisa Tailandesa França">
-                <div class="product-info">
-                    <div class="product-name">Camisa Tailandesa França</div>
-                    <div class="price-box">
-                        <span class="old-price">R$ 159,99</span>
-                        <span class="product-price">R$ 129,99</span>
-                    </div>
-                    <button class="btn-buy" onclick="comprar('Camisa Tailandesa França', 'R$ 129,99')">Comprar</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Botão Flutuante do WhatsApp -->
-    <a href="javascript:void(0);" onclick="abrirWhatsApp()" class="whatsapp-float">
-        💬
-    </a>
-
+    <!-- SCRIPT DA LOJA -->
     <script>
-        // Insere o teu número de WhatsApp aqui com o DDD (Ex: 5531999999999)
-        const numeroWhatsApp = "5500000000000"; 
+        const products = [
+            // Bonés Oakley
+            { id: 1, name: "Boné Oakley Branco Gelo", price: 70.00, originalPrice: null, image: "bone_oakley_branco_gelo.png" },
+            { id: 2, name: "Boné Oakley Preto", price: 70.00, originalPrice: null, image: "bone_oakley_preto.png" },
+            { id: 3, name: "Boné Oakley Verde Oliva", price: 70.00, originalPrice: null, image: "bone_oakley_verde_oliva.png" },
+            
+            // Camisas Tailandesas de Time (Promoção)
+            { id: 4, name: "Camisa Tailandesa Barcelona", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa Barcelona.png" },
+            { id: 5, name: "Camisa Tailandesa Manchester City", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa Manchester city.png" },
+            { id: 6, name: "Camisa Tailandesa Cruzeiro", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa cruzeiro.png" },
+            { id: 7, name: "Camisa Tailandesa França", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa frança.png" }
+        ];
 
-        function comprar(produto, preco) {
-            const mensagem = encodeURIComponent(`Olá! Tenho interesse em comprar o produto: *${produto}* no valor de *${preco}*.`);
-            window.open(`https://wa.me/${numeroWhatsApp}?text=${mensagem}`, '_blank');
+        let cart = [];
+
+        // Renderizar Produtos
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = products.map(p => `
+                <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden flex flex-col justify-between p-3 relative">
+                    ${p.originalPrice ? `<span class="absolute top-2 left-2 bg-emerald-500 text-black text-[10px] font-black px-2 py-0.5 rounded-md z-10">OFERTA</span>` : ''}
+                    <img src="${p.image}" alt="${p.name}" class="w-full aspect-square object-cover rounded-xl mb-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-white mb-1">${p.name}</h3>
+                        <div class="flex items-center justify-between mt-2">
+                            <div>
+                                ${p.originalPrice ? `<span class="text-[11px] text-zinc-500 line-through block">R$ ${p.originalPrice.toFixed(2)}</span>` : ''}
+                                <span class="text-sm font-black text-emerald-400">R$ ${p.price.toFixed(2)}</span>
+                            </div>
+                            <button onclick="addToCart(${p.id})" class="bg-emerald-500 hover:bg-emerald-400 text-black font-bold px-3 py-1.5 rounded-lg text-xs transition">
+                                + Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function abrirWhatsApp() {
-            const mensagem = encodeURIComponent("Olá! Gostaria de tirar algumas dúvidas sobre os produtos da GBR Store.");
-            window.open(`https://wa.me/${numeroWhatsApp}?text=${mensagem}`, '_blank');
+        // Adicionar ao carrinho
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty++;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCart();
+            toggleCart(true);
         }
+
+        // Atualizar valores do carrinho
+        function updateCart() {
+            const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
+            const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+            document.getElementById('cartCount').innerText = totalCount;
+            document.getElementById('cartTotal').innerText = `R$ ${totalPrice.toFixed(2)}`;
+
+            // Progresso de Frete Grátis
+            const limit = 199.00;
+            const progress = Math.min((totalPrice / limit) * 100, 100);
+            document.getElementById('freeShippingBar').style.width = `${progress}%`;
+
+            if (totalPrice >= limit) {
+                document.getElementById('freeShippingText').innerText = "🎉 Parabéns! Você ganhou Frete Grátis!";
+            } else {
+                document.getElementById('freeShippingText').innerText = `Adicione R$ ${(limit - totalPrice).toFixed(2)} para Frete Grátis!`;
+            }
+
+            // Renderizar itens no Modal
+            const itemsContainer = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = '<p class="text-center text-zinc-500 py-8 text-xs">Seu carrinho está vazio.</p>';
+            } else {
+                itemsContainer.innerHTML = cart.map(item => `
+                    <div class="flex items-center justify-between bg-black/50 border border-zinc-800 p-2.5 rounded-xl">
+                        <img src="${item.image}" class="w-10 h-10 rounded-lg object-cover">
+                        <div class="flex-1 px-2">
+                            <h4 class="font-bold text-xs text-white">${item.name}</h4>
+                            <p class="text-[11px] text-emerald-400 font-bold">R$ ${(item.price * item.qty).toFixed(2)}</p>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 bg-zinc-800 hover:bg-zinc-700 rounded flex items-center justify-center text-xs font-bold">-</button>
+                            <span class="text-xs font-bold px-1">${item.qty}</span>
+                            <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 bg-zinc-800 hover:bg-zinc-700 rounded flex items-center justify-center text-xs font-bold">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+            }
+            updateCart();
+        }
+
+        // Abrir/Fechar Carrinho
+        function toggleCart(show) {
+            const modal = document.getElementById('cartModal');
+            if (show) {
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Finalizar Pedido no WhatsApp
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert("Seu carrinho está vazio!");
+                return;
+            }
+
+            const phone = "SEU_NUMERO_AQUI"; // Coloque o seu número com DDD aqui (Ex: "5511999999999")
+            let message = "*Novo Pedido - GBR Store*\n\n";
+
+            cart.forEach(item => {
+                message += `• ${item.name} (x${item.qty}) - R$ ${(item.price * item.qty).toFixed(2)}\n`;
+            });
+
+            const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+            message += `\n*Total:* R$ ${totalPrice.toFixed(2)}`;
+
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Eventos
+        document.getElementById('cartBtn').addEventListener('click', () => toggleCart(true));
+        document.getElementById('closeCartBtn').addEventListener('click', () => toggleCart(false));
+
+        // Inicializar Loja
+        renderProducts();
     </script>
 </body>
 </html>
