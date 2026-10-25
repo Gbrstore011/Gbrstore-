@@ -2,265 +2,322 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="dark scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GBR Store - Loja Virtual</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: { extend: { colors: { brand: {
-                50: '#ecfdf5', 100: '#d1fae5', 500: '#10b981',
-                600: '#059669', 700: '#047857'
-            }}}}
-        };
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Inter', sans-serif; }</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GBR Store - Loja Virtual</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+    darkMode: 'class',
+    theme: { extend: { colors: { brand: {
+        50:'#ecfdf5',100:'#d1fae5',500:'#10b981',
+        600:'#059669',700:'#047857'
+    }}}}
+};
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body { font-family:'Inter',sans-serif; }
+.category-btn { white-space:nowrap; }
+</style>
 </head>
+
 <body class="bg-black text-white min-h-screen flex flex-col">
 
-    <div class="bg-emerald-600 text-white text-xs sm:text-sm py-2 px-4 text-center font-medium">
-        ⚡ Frete Grátis em compras acima de R$ 199!
-        Use o cupom <span class="underline font-bold">GBR10</span> para 10% OFF.
+<div class="bg-emerald-600 text-white text-xs sm:text-sm py-2 px-4 text-center font-medium">
+⚡ Frete Grátis em compras acima de R$ 199! Use o cupom
+<span class="underline font-bold">GBR10</span> para 10% OFF.
+</div>
+
+<header class="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-zinc-800">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+        <a href="#" class="flex items-center">
+            <img src="gbr_store_logo.png" alt="GBR Store" class="h-16 w-auto object-contain">
+        </a>
+        <button id="cartBtn" class="relative px-4 py-2 bg-emerald-500 text-white rounded-full font-bold shadow-md hover:bg-emerald-600">
+            🛒 Carrinho
+            <span id="cartCount" class="bg-white text-emerald-700 text-xs font-black px-2 py-0.5 rounded-full ml-1">0</span>
+        </button>
+    </div>
+</header>
+
+<section class="max-w-7xl mx-auto px-4 pt-4 pb-4 w-full">
+    <a href="#produtos" class="block overflow-hidden rounded-3xl border border-zinc-800 shadow-xl">
+        <img src="Banner gbr.jpg" alt="GBR Store Banner" class="w-full h-auto object-cover">
+    </a>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-6 w-full">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="bg-zinc-900/80 border border-zinc-800 p-3 rounded-2xl flex items-center gap-3">
+            <span class="text-xl">✅</span>
+            <div><h4 class="font-bold text-xs">Garantia Total</h4><p class="text-[10px] text-zinc-400">30 dias de troca</p></div>
+        </div>
+        <div class="bg-zinc-900/80 border border-zinc-800 p-3 rounded-2xl flex items-center gap-3">
+            <span class="text-xl">⚡</span>
+            <div><h4 class="font-bold text-xs">Envio Rápido</h4><p class="text-[10px] text-zinc-400">Despacho em 24h</p></div>
+        </div>
+        <div class="bg-zinc-900/80 border border-zinc-800 p-3 rounded-2xl flex items-center gap-3">
+            <span class="text-xl">🔒</span>
+            <div><h4 class="font-bold text-xs">Pagamento Seguro</h4><p class="text-[10px] text-zinc-400">Pix ou Cartão</p></div>
+        </div>
+        <div class="bg-zinc-900/80 border border-zinc-800 p-3 rounded-2xl flex items-center gap-3">
+            <span class="text-xl">🎧</span>
+            <div><h4 class="font-bold text-xs">Suporte</h4><p class="text-[10px] text-zinc-400">Atendimento fácil</p></div>
+        </div>
+    </div>
+</section>
+
+<main id="produtos" class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full">
+    <h2 class="text-2xl font-bold mb-5">Nossa Coleção</h2>
+
+    <!-- PESQUISA -->
+    <input id="searchInput" type="search"
+        placeholder="🔎 Buscar produto..."
+        class="w-full bg-zinc-900 border border-zinc-700 rounded-xl p-3 mb-5 text-white outline-none focus:border-emerald-500">
+
+    <!-- CATEGORIAS -->
+    <div id="categoryButtons" class="flex gap-2 overflow-x-auto pb-4 mb-3">
+        <button data-category="todos" class="category-btn shrink-0 bg-emerald-500 text-black px-4 py-2 rounded-full font-bold text-sm">Todos</button>
+        <button data-category="bone" class="category-btn shrink-0 bg-zinc-800 text-white px-4 py-2 rounded-full font-bold text-sm">Bonés</button>
+        <button data-category="camisa" class="category-btn shrink-0 bg-zinc-800 text-white px-4 py-2 rounded-full font-bold text-sm">Camisas</button>
+        <button data-category="time" class="category-btn shrink-0 bg-zinc-800 text-white px-4 py-2 rounded-full font-bold text-sm">Camisas de time</button>
+        <button data-category="calca" class="category-btn shrink-0 bg-zinc-800 text-white px-4 py-2 rounded-full font-bold text-sm">Calças</button>
+        <button data-category="tenis" class="category-btn shrink-0 bg-zinc-800 text-white px-4 py-2 rounded-full font-bold text-sm">Tênis</button>
     </div>
 
-    <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-zinc-800">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
-            <a href="#" class="flex items-center">
-                <img src="gbr_store_logo.png" alt="GBR Store" class="h-16 w-auto object-contain">
-            </a>
-            <button id="cartBtn" class="relative px-4 py-2 bg-emerald-500 text-white rounded-full font-bold shadow-md hover:bg-emerald-600">
-                🛒 Carrinho
-                <span id="cartCount" class="bg-white text-emerald-700 text-xs font-black px-2 py-0.5 rounded-full ml-1">0</span>
+    <p id="resultsText" class="text-sm text-zinc-400 mb-4"></p>
+    <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+</main>
+
+<!-- CARRINHO -->
+<div id="cartModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden justify-end">
+    <div class="bg-zinc-900 w-full max-w-md h-full flex flex-col justify-between p-6 border-l border-zinc-800">
+        <div>
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">Seu Carrinho</h3>
+                <button id="closeCartBtn" class="text-zinc-400 hover:text-white font-bold text-xl">✕</button>
+            </div>
+            <div class="mb-4">
+                <p id="freeShippingText" class="text-xs mb-1 font-semibold text-emerald-400"></p>
+                <div class="w-full bg-zinc-800 rounded-full h-2 overflow-hidden">
+                    <div id="freeShippingBar" class="bg-emerald-500 h-2 rounded-full transition-all" style="width:0%"></div>
+                </div>
+            </div>
+            <div id="cartItems" class="space-y-3 max-h-[60vh] overflow-y-auto pr-1"></div>
+        </div>
+        <div class="border-t border-zinc-800 pt-4 mt-auto">
+            <div class="flex justify-between text-lg font-bold mb-4">
+                <span>Total:</span><span id="cartTotal" class="text-emerald-400">R$ 0,00</span>
+            </div>
+            <button id="checkoutBtn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-black font-extrabold py-3 rounded-xl transition">
+                Finalizar Pedido via WhatsApp
             </button>
         </div>
-    </header>
+    </div>
+</div>
 
-    <section class="max-w-7xl mx-auto px-4 pt-4 pb-4 w-full">
-        <a href="#produtos" class="block overflow-hidden rounded-3xl border border-zinc-800 shadow-xl">
-            <img src="Banner gbr.jpg" alt="GBR Store Banner" class="w-full h-auto object-cover">
-        </a>
-    </section>
+<script>
+const shirtSizes = ["M","G","GG","G1","G2","G3"];
 
-    <section class="max-w-7xl mx-auto px-4 py-6 w-full">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <div class="bg-zinc-900/80 border border-zinc-800 p-3 rounded-2xl flex items-center gap-3">
-                <span class="text-xl">✅</span><div><h4 class="font-bold text-xs">Garantia Total</h4><p class="text-[10px] text-zinc-400">30 dias de troca</p></div>
-            </div>
-            <div class="bg-zinc-900/80 border border-zinc-800 p-3 rounded-2xl flex items-center gap-3">
-                <span class="text-xl">⚡</span><div><h4 class="font-bold text-xs">Envio Rápido</h4><p class="text-[10px] text-zinc-400">Despacho em 24h</p></div>
-            </div>
-            <div class="bg-zinc-900/80 border border-zinc-800 p-3 rounded-2xl flex items-center gap-3">
-                <span class="text-xl">🔒</span><div><h4 class="font-bold text-xs">Pagamento Seguro</h4><p class="text-[10px] text-zinc-400">Pix ou Cartão</p></div>
-            </div>
-            <div class="bg-zinc-900/80 border border-zinc-800 p-3 rounded-2xl flex items-center gap-3">
-                <span class="text-xl">🎧</span><div><h4 class="font-bold text-xs">Suporte</h4><p class="text-[10px] text-zinc-400">Atendimento fácil</p></div>
-            </div>
-        </div>
-    </section>
+const products = [
+    {id:1,name:"Boné Oakley Branco Gelo",price:70,originalPrice:null,image:"bone_oakley_branco_gelo.png",category:"bone"},
+    {id:2,name:"Boné Oakley Preto",price:70,originalPrice:null,image:"bone_oakley_preto.png",category:"bone"},
+    {id:3,name:"Boné Oakley Verde Oliva",price:70,originalPrice:null,image:"bone_oakley_verde_oliva.png",category:"bone"},
+    {id:4,name:"Boné Brooksfield",price:70,originalPrice:null,image:"Boné_Brooksfield.png",category:"bone"},
+    {id:5,name:"Boné Lacoste Sport Verde",price:70,originalPrice:null,image:"Boné_Lacoste_verde_2025.png",category:"bone"},
+    {id:6,name:"Boné Lacoste Sport Preto",price:70,originalPrice:null,image:"Boné_Lacoste_sport_preto_2025.png",category:"bone"},
 
-    <main id="produtos" class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full">
-        <h2 class="text-2xl font-bold mb-6">Produtos em Destaque</h2>
-        <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
-    </main>
+    {id:7,name:"Camisa Tailandesa Barcelona",price:129.99,originalPrice:159.99,image:"Camisa tailandesa Barcelona.png",category:"time",hasSizes:true},
+    {id:8,name:"Camisa Tailandesa Manchester City",price:129.99,originalPrice:159.99,image:"Camisa tailandesa Manchester city.png",category:"time",hasSizes:true},
+    {id:9,name:"Camisa Tailandesa Cruzeiro",price:129.99,originalPrice:159.99,image:"Camisa tailandesa cruzeiro.png",category:"time",hasSizes:true},
+    {id:10,name:"Camisa Tailandesa França",price:129.99,originalPrice:159.99,image:"Camisa tailandesa frança.png",category:"time",hasSizes:true},
 
-    <div id="cartModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden justify-end">
-        <div class="bg-zinc-900 w-full max-w-md h-full flex flex-col justify-between p-6 border-l border-zinc-800">
+    {id:14,name:"Camisa Boss",price:80,originalPrice:null,image:"Camisa boss.png",category:"camisa",hasSizes:true},
+    {id:15,name:"Camisa Balmain",price:80,originalPrice:null,image:"Camisa balmain.png",category:"camisa",hasSizes:true}
+];
+
+let cart = [];
+let activeCategory = "todos";
+
+function formatPrice(value) {
+    return value.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+}
+
+function renderProducts() {
+    const grid = document.getElementById("productGrid");
+    const query = document.getElementById("searchInput").value.trim().toLocaleLowerCase("pt-BR");
+
+    const filtered = products.filter(p => {
+        const categoryMatch = activeCategory === "todos" || p.category === activeCategory;
+        const searchMatch = p.name.toLocaleLowerCase("pt-BR").includes(query);
+        return categoryMatch && searchMatch;
+    });
+
+    document.getElementById("resultsText").textContent =
+        `${filtered.length} produto(s) encontrado(s)`;
+
+    if (!filtered.length) {
+        grid.innerHTML = `<p class="col-span-full text-center text-zinc-400 py-10">Nenhum produto encontrado nessa categoria.</p>`;
+        return;
+    }
+
+    grid.innerHTML = filtered.map(p => `
+        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden flex flex-col justify-between p-3 relative">
+            ${p.originalPrice ? `<span class="absolute top-2 left-2 bg-emerald-500 text-black text-[10px] font-black px-2 py-0.5 rounded-md z-10">OFERTA</span>` : ""}
+            <img src="${p.image}" alt="${p.name}" class="w-full aspect-square object-cover rounded-xl mb-3" loading="lazy"
+                onerror="this.onerror=null; this.alt='Imagem não encontrada: ${p.name}'; this.classList.add('bg-zinc-800');">
             <div>
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-xl font-bold">Seu Carrinho</h3>
-                    <button id="closeCartBtn" class="text-zinc-400 hover:text-white font-bold text-xl">✕</button>
+                <h3 class="font-bold text-sm text-white mb-1">${p.name}</h3>
+                <div class="mt-2">
+                    ${p.originalPrice ? `<span class="text-[11px] text-zinc-500 line-through block">${formatPrice(p.originalPrice)}</span>` : ""}
+                    <span class="text-sm font-black text-emerald-400">${formatPrice(p.price)}</span>
                 </div>
-                <div class="mb-4">
-                    <p id="freeShippingText" class="text-xs mb-1 font-semibold text-emerald-400"></p>
-                    <div class="w-full bg-zinc-800 rounded-full h-2 overflow-hidden">
-                        <div id="freeShippingBar" class="bg-emerald-500 h-2 rounded-full transition-all" style="width: 0%"></div>
-                    </div>
-                </div>
-                <div id="cartItems" class="space-y-3 max-h-[60vh] overflow-y-auto pr-1"></div>
-            </div>
-            <div class="border-t border-zinc-800 pt-4 mt-auto">
-                <div class="flex justify-between text-lg font-bold mb-4">
-                    <span>Total:</span><span id="cartTotal" class="text-emerald-400">R$ 0,00</span>
-                </div>
-                <button id="checkoutBtn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-black font-extrabold py-3 rounded-xl transition">
-                    Finalizar Pedido via WhatsApp
+                ${p.hasSizes ? `
+                    <label for="size-${p.id}" class="block text-xs text-zinc-300 mt-3 mb-1 font-semibold">Tamanho disponível:</label>
+                    <select id="size-${p.id}" class="w-full bg-black border border-zinc-700 text-white rounded-lg p-2 text-xs">
+                        <option value="">Escolha o tamanho</option>
+                        ${shirtSizes.map(size=>`<option value="${size}">${size}</option>`).join("")}
+                    </select>` : ""}
+                <button onclick="addToCart(${p.id})" class="w-full mt-3 bg-emerald-500 hover:bg-emerald-400 text-black font-bold px-3 py-2 rounded-lg text-xs">
+                    + Adicionar ao carrinho
                 </button>
             </div>
         </div>
-    </div>
+    `).join("");
+}
 
-    <script>
-        const shirtSizes = ["M", "G", "GG", "G1", "G2", "G3"];
+function addToCart(id) {
+    const product = products.find(p=>p.id===id);
+    if (!product) return;
 
-        const products = [
-            { id: 1, name: "Boné Oakley Branco Gelo", price: 70.00, originalPrice: null, image: "bone_oakley_branco_gelo.png" },
-            { id: 2, name: "Boné Oakley Preto", price: 70.00, originalPrice: null, image: "bone_oakley_preto.png" },
-            { id: 3, name: "Boné Oakley Verde Oliva", price: 70.00, originalPrice: null, image: "bone_oakley_verde_oliva.png" },
-            { id: 4, name: "Boné Brooksfield", price: 70.00, originalPrice: null, image: "Boné_Brooksfield.png" },
-            { id: 5, name: "Boné Lacoste Sport Verde", price: 70.00, originalPrice: null, image: "Boné_Lacoste_verde_2025.png" },
-            { id: 6, name: "Boné Lacoste Sport Preto", price: 70.00, originalPrice: null, image: "Boné_Lacoste_sport_preto_2025.png" },
-            { id: 7, name: "Camisa Tailandesa Barcelona", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa Barcelona.png", hasSizes: true },
-            { id: 8, name: "Camisa Tailandesa Manchester City", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa Manchester city.png", hasSizes: true },
-            { id: 9, name: "Camisa Tailandesa Cruzeiro", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa cruzeiro.png", hasSizes: true },
-            { id: 10, name: "Camisa Tailandesa França", price: 129.99, originalPrice: 159.99, image: "Camisa tailandesa frança.png", hasSizes: true },
-            { id: 14, name: "Camisa Boss", price: 80.00, originalPrice: null, image: "Camisa boss.png", hasSizes: true },
-            { id: 15, name: "Camisa Balmain", price: 80.00, originalPrice: null, image: "Camisa balmain.png", hasSizes: true }
-        ];
-
-        let cart = [];
-
-        function formatPrice(value) {
-            return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    let size = null;
+    if (product.hasSizes) {
+        const select = document.getElementById(`size-${id}`);
+        size = select ? select.value : "";
+        if (!size) {
+            alert("Escolha o tamanho da camisa antes de adicionar ao carrinho.");
+            if (select) select.focus();
+            return;
         }
+    }
 
-        function renderProducts() {
-            const grid = document.getElementById("productGrid");
-            grid.innerHTML = products.map(p => `
-                <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden flex flex-col justify-between p-3 relative">
-                    ${p.originalPrice ? `<span class="absolute top-2 left-2 bg-emerald-500 text-black text-[10px] font-black px-2 py-0.5 rounded-md z-10">OFERTA</span>` : ""}
-                    <img src="${p.image}" alt="${p.name}" class="w-full aspect-square object-cover rounded-xl mb-3" loading="lazy"
-                         onerror="this.onerror=null; this.alt='Imagem não encontrada: ${p.name}'; this.classList.add('bg-zinc-800');">
-                    <div>
-                        <h3 class="font-bold text-sm text-white mb-1">${p.name}</h3>
-                        <div class="mt-2">
-                            ${p.originalPrice ? `<span class="text-[11px] text-zinc-500 line-through block">${formatPrice(p.originalPrice)}</span>` : ""}
-                            <span class="text-sm font-black text-emerald-400">${formatPrice(p.price)}</span>
-                        </div>
-                        ${p.hasSizes ? `
-                            <label for="size-${p.id}" class="block text-xs text-zinc-300 mt-3 mb-1 font-semibold">Tamanho disponível:</label>
-                            <select id="size-${p.id}" class="w-full bg-black border border-zinc-700 text-white rounded-lg p-2 text-xs focus:outline-none focus:border-emerald-500">
-                                <option value="">Escolha o tamanho</option>
-                                ${shirtSizes.map(size => `<option value="${size}">${size}</option>`).join("")}
-                            </select>
-                        ` : ""}
-                        <button onclick="addToCart(${p.id})" class="w-full mt-3 bg-emerald-500 hover:bg-emerald-400 text-black font-bold px-3 py-2 rounded-lg text-xs">
-                            + Adicionar ao carrinho
-                        </button>
-                    </div>
-                </div>
-            `).join("");
-        }
+    const item = cart.find(i=>i.id===id && i.size===size);
+    if (item) item.qty++;
+    else cart.push({...product,size,qty:1});
 
-        function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            if (!product) return;
+    updateCart();
+    toggleCart(true);
+}
 
-            let size = null;
-            if (product.hasSizes) {
-                const sizeSelect = document.getElementById(`size-${id}`);
-                size = sizeSelect ? sizeSelect.value : "";
-                if (!size) {
-                    alert("Escolha o tamanho da camisa antes de adicionar ao carrinho.");
-                    if (sizeSelect) sizeSelect.focus();
-                    return;
-                }
-            }
+function updateCart() {
+    const totalCount = cart.reduce((sum,item)=>sum+item.qty,0);
+    const totalPrice = cart.reduce((sum,item)=>sum+item.price*item.qty,0);
 
-            const item = cart.find(i => i.id === id && i.size === size);
-            if (item) {
-                item.qty++;
-            } else {
-                cart.push({ ...product, size, qty: 1 });
-            }
-            updateCart();
-            toggleCart(true);
-        }
+    document.getElementById("cartCount").innerText = totalCount;
+    document.getElementById("cartTotal").innerText = formatPrice(totalPrice);
 
-        function updateCart() {
-            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-            const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-            document.getElementById("cartCount").innerText = totalCount;
-            document.getElementById("cartTotal").innerText = formatPrice(totalPrice);
+    const limit = 199;
+    document.getElementById("freeShippingBar").style.width =
+        `${Math.min((totalPrice/limit)*100,100)}%`;
+    document.getElementById("freeShippingText").innerText =
+        totalPrice>=limit ? "🎉 Parabéns! Você ganhou Frete Grátis!" :
+        `Adicione ${formatPrice(limit-totalPrice)} para Frete Grátis!`;
 
-            const limit = 199.00;
-            const progress = Math.min((totalPrice / limit) * 100, 100);
-            document.getElementById("freeShippingBar").style.width = `${progress}%`;
-            document.getElementById("freeShippingText").innerText =
-                totalPrice >= limit
-                    ? "🎉 Parabéns! Você ganhou Frete Grátis!"
-                    : `Adicione ${formatPrice(limit - totalPrice)} para Frete Grátis!`;
+    const container = document.getElementById("cartItems");
+    if (!cart.length) {
+        container.innerHTML = `<p class="text-center text-zinc-500 py-8 text-xs">Seu carrinho está vazio.</p>`;
+        return;
+    }
 
-            const itemsContainer = document.getElementById("cartItems");
-            if (cart.length === 0) {
-                itemsContainer.innerHTML = `<p class="text-center text-zinc-500 py-8 text-xs">Seu carrinho está vazio.</p>`;
-                return;
-            }
+    container.innerHTML = cart.map((item,index)=>`
+        <div class="flex items-center justify-between bg-black/50 border border-zinc-800 p-2.5 rounded-xl gap-2">
+            <img src="${item.image}" alt="${item.name}" class="w-10 h-10 rounded-lg object-cover">
+            <div class="flex-1 px-1 min-w-0">
+                <h4 class="font-bold text-xs text-white">${item.name}</h4>
+                ${item.size ? `<p class="text-[11px] text-zinc-300">Tamanho: <strong>${item.size}</strong></p>` : ""}
+                <p class="text-[11px] text-emerald-400 font-bold">${formatPrice(item.price)} cada</p>
+            </div>
+            <div class="flex items-center gap-1.5">
+                <button onclick="changeQty(${index},-1)" class="w-6 h-6 bg-zinc-800 rounded text-xs font-bold">-</button>
+                <span class="text-xs font-bold px-1">${item.qty}</span>
+                <button onclick="changeQty(${index},1)" class="w-6 h-6 bg-zinc-800 rounded text-xs font-bold">+</button>
+                <button onclick="removeCartItem(${index})" class="ml-1 text-red-400 text-sm font-bold" aria-label="Remover produto">✕</button>
+            </div>
+        </div>`).join("");
+}
 
-            itemsContainer.innerHTML = cart.map((item, index) => `
-                <div class="flex items-center justify-between bg-black/50 border border-zinc-800 p-2.5 rounded-xl gap-2">
-                    <img src="${item.image}" alt="${item.name}" class="w-10 h-10 rounded-lg object-cover">
-                    <div class="flex-1 px-1 min-w-0">
-                        <h4 class="font-bold text-xs text-white">${item.name}</h4>
-                        ${item.size ? `<p class="text-[11px] text-zinc-300">Tamanho: <strong>${item.size}</strong></p>` : ""}
-                        <p class="text-[11px] text-emerald-400 font-bold">${formatPrice(item.price)} cada</p>
-                    </div>
-                    <div class="flex items-center gap-1.5">
-                        <button onclick="changeQty(${index}, -1)" class="w-6 h-6 bg-zinc-800 rounded flex items-center justify-center text-xs font-bold">-</button>
-                        <span class="text-xs font-bold px-1">${item.qty}</span>
-                        <button onclick="changeQty(${index}, 1)" class="w-6 h-6 bg-zinc-800 rounded flex items-center justify-center text-xs font-bold">+</button>
-                        <button onclick="removeCartItem(${index})" aria-label="Remover produto" class="ml-1 text-red-400 text-sm font-bold">✕</button>
-                    </div>
-                </div>
-            `).join("");
-        }
+function changeQty(index,delta) {
+    const item = cart[index];
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty<=0) cart.splice(index,1);
+    updateCart();
+}
 
-        function changeQty(index, delta) {
-            const item = cart[index];
-            if (!item) return;
-            item.qty += delta;
-            if (item.qty <= 0) cart.splice(index, 1);
-            updateCart();
-        }
+function removeCartItem(index) {
+    if (index<0 || index>=cart.length) return;
+    cart.splice(index,1);
+    updateCart();
+}
 
-        function removeCartItem(index) {
-            if (index < 0 || index >= cart.length) return;
-            cart.splice(index, 1);
-            updateCart();
-        }
+function toggleCart(show) {
+    const modal = document.getElementById("cartModal");
+    if (show) {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+    } else {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+    }
+}
 
-        function toggleCart(show) {
-            const modal = document.getElementById("cartModal");
-            if (show) {
-                modal.classList.remove("hidden");
-                modal.classList.add("flex");
-            } else {
-                modal.classList.add("hidden");
-                modal.classList.remove("flex");
-            }
-        }
+function checkoutWhatsApp() {
+    if (!cart.length) {
+        alert("Seu carrinho está vazio!");
+        return;
+    }
 
-        function checkoutWhatsApp() {
-            if (cart.length === 0) {
-                alert("Seu carrinho está vazio!");
-                return;
-            }
+    const phone = "5511952884586";
+    let message = "*Novo Pedido - GBR Store*\\n\\n";
 
-            const phone = "5511952884586";
-            let message = "*Novo Pedido - GBR Store*\\n\\n";
-            cart.forEach(item => {
-                message += `• ${item.name}${item.size ? ` (Tamanho: ${item.size})` : ""} (x${item.qty}) - ${formatPrice(item.price * item.qty)}\\n`;
-            });
-            const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-            message += `\\n*Total:* ${formatPrice(totalPrice)}`;
-            message += "\\n\\nPor favor, confirme a disponibilidade e combine a entrega.";
+    cart.forEach(item => {
+        message += `• ${item.name}${item.size ? ` (Tamanho: ${item.size})` : ""} (x${item.qty}) - ${formatPrice(item.price*item.qty)}\\n`;
+    });
 
-            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-            window.open(url, "_blank");
-        }
+    const totalPrice = cart.reduce((sum,item)=>sum+item.price*item.qty,0);
+    message += `\\n*Total:* ${formatPrice(totalPrice)}`;
+    message += "\\n\\nPor favor, confirme a disponibilidade e combine a entrega.";
 
-        document.getElementById("cartBtn").addEventListener("click", () => toggleCart(true));
-        document.getElementById("closeCartBtn").addEventListener("click", () => toggleCart(false));
-        document.getElementById("checkoutBtn").addEventListener("click", checkoutWhatsApp);
-        document.getElementById("cartModal").addEventListener("click", event => {
-            if (event.target.id === "cartModal") toggleCart(false);
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`,"_blank");
+}
+
+document.getElementById("searchInput").addEventListener("input",renderProducts);
+
+document.querySelectorAll(".category-btn").forEach(button=>{
+    button.addEventListener("click",()=>{
+        activeCategory = button.dataset.category;
+        document.querySelectorAll(".category-btn").forEach(btn=>{
+            btn.classList.remove("bg-emerald-500","text-black");
+            btn.classList.add("bg-zinc-800","text-white");
         });
-
+        button.classList.remove("bg-zinc-800","text-white");
+        button.classList.add("bg-emerald-500","text-black");
         renderProducts();
-        updateCart();
-    </script>
+    });
+});
+
+document.getElementById("cartBtn").addEventListener("click",()=>toggleCart(true));
+document.getElementById("closeCartBtn").addEventListener("click",()=>toggleCart(false));
+document.getElementById("checkoutBtn").addEventListener("click",checkoutWhatsApp);
+document.getElementById("cartModal").addEventListener("click",event=>{
+    if (event.target.id==="cartModal") toggleCart(false);
+});
+
+renderProducts();
+updateCart();
+</script>
 </body>
 </html>
